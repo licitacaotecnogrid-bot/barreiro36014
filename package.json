@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "echo 'Cloudflare Pages project'"
+    "dev": "echo 'Cloudflare Pages project'",
+    "build": "echo \"No build step defined\"",
+    "build:cloudflare": "npm run build",
+    "deploy:pages": "echo 'Use Cloudflare Pages deploy via Git or wrangler pages deploy if needed'"
   }
 }
