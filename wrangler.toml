@@ -1,0 +1,20 @@
+name = "barreiro360-api"
+main = "dist/server/cloudflare-worker.mjs"
+compatibility_date = "2024-12-16"
+compatibility_flags = ["nodejs_compat"]
+
+[build]
+command = "npm run build:cloudflare"
+cwd = "./"
+
+# D1 Database Binding
+[[d1_databases]]
+binding = "DB"
+database_name = "barreiro360-db"
+database_id = "281783e2-a986-4a7c-8fc3-b3628af37708"
+
+[env.production]
+vars = { ENVIRONMENT = "production" }
+d1_databases = [
+  { binding = "DB", database_name = "barreiro360-db", database_id = "281783e2-a986-4a7c-8fc3-b3628af37708" }
+]

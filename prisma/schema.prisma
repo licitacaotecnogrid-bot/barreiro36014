@@ -1,0 +1,188 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ProfessorCoordenador {
+  id    Int     @id @default(autoincrement())
+  nome  String
+  email String  @unique
+  senha String
+  curso String
+
+  materias         MateriaProfessor[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProjetoPesquisa {
+  id                        Int     @id @default(autoincrement())
+  titulo                    String
+  areaTematica              String
+  descricao                 String
+  momentoOcorre             DateTime
+  problemaPesquisa          String
+  metodologia               String
+  resultadosEsperados       String
+  imagem                    String?
+
+  professorCoordenadorId    Int
+  professorCoordenador      Usuario @relation(fields: [professorCoordenadorId], references: [id], onDelete: Cascade)
+
+  materias                  MateriaProjetoPesquisa[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProjetoExtensao {
+  id                        Int     @id @default(autoincrement())
+  titulo                    String
+  areaTematica              String
+  descricao                 String
+  momentoOcorre             DateTime
+  tipoPessoasProcuram       String
+  comunidadeEnvolvida       String
+  imagem                    String?
+
+  professorCoordenadorId    Int
+  professorCoordenador      Usuario @relation(fields: [professorCoordenadorId], references: [id], onDelete: Cascade)
+
+  materias                  MateriaProjetoExtensao[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Materia {
+  id          Int     @id @default(autoincrement())
+  nome        String  @unique
+  descricao   String
+
+  professores             MateriaProfessor[]
+  projetosPesquisa        MateriaProjetoPesquisa[]
+  projetosExtensao        MateriaProjetoExtensao[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MateriaProfessor {
+  id                        Int     @id @default(autoincrement())
+  professorId               Int
+  materiaId                 Int
+  tipoCoordenacao           String // "pesquisa" ou "extensao"
+
+  professor                 ProfessorCoordenador @relation(fields: [professorId], references: [id], onDelete: Cascade)
+  materia                   Materia @relation(fields: [materiaId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([professorId, materiaId, tipoCoordenacao])
+}
+
+model MateriaProjetoPesquisa {
+  id                  Int     @id @default(autoincrement())
+  materiaId           Int
+  projetoPesquisaId   Int
+
+  materia             Materia @relation(fields: [materiaId], references: [id], onDelete: Cascade)
+  projetoPesquisa     ProjetoPesquisa @relation(fields: [projetoPesquisaId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([materiaId, projetoPesquisaId])
+}
+
+model MateriaProjetoExtensao {
+  id                  Int     @id @default(autoincrement())
+  materiaId           Int
+  projetoExtensaoId   Int
+
+  materia             Materia @relation(fields: [materiaId], references: [id], onDelete: Cascade)
+  projetoExtensao     ProjetoExtensao @relation(fields: [projetoExtensaoId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([materiaId, projetoExtensaoId])
+}
+
+model Usuario {
+  id        Int     @id @default(autoincrement())
+  nome      String
+  email     String  @unique
+  senha     String
+  cargo     String  // "Aluno", "Professor", "Coordenador"
+
+  comentarios ComentarioEvento[]
+  projetosPesquisa ProjetoPesquisa[]
+  projetosExtensao ProjetoExtensao[]
+
+  criadoEm  DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+}
+
+model Evento {
+  id              Int     @id @default(autoincrement())
+  titulo          String
+  data            DateTime
+  responsavel     String
+  status          String  // "Confirmado", "Pendente", "Cancelado"
+  local           String?
+  curso           String
+  tipoEvento      String  // "Projeto de Extensão", "Pesquisa"
+  modalidade      String  // "Presencial", "Online", "Híbrido"
+  descricao       String?
+  imagem          String?
+  documento       String?
+  link            String?
+
+  odsAssociadas   OdsEvento[]
+  anexos          AnexoEvento[]
+  comentarios     ComentarioEvento[]
+
+  criadoEm        DateTime @default(now())
+  atualizadoEm    DateTime @updatedAt
+}
+
+model OdsEvento {
+  id        Int @id @default(autoincrement())
+  eventoId  Int
+  odsNumero Int // 1-17
+
+  evento    Evento @relation(fields: [eventoId], references: [id], onDelete: Cascade)
+
+  criadoEm  DateTime @default(now())
+
+  @@unique([eventoId, odsNumero])
+}
+
+model AnexoEvento {
+  id        Int     @id @default(autoincrement())
+  eventoId  Int
+  nome      String
+
+  evento    Evento @relation(fields: [eventoId], references: [id], onDelete: Cascade)
+
+  criadoEm  DateTime @default(now())
+}
+
+model ComentarioEvento {
+  id        Int     @id @default(autoincrement())
+  eventoId  Int
+  usuarioId Int?
+  autor     String
+  conteudo  String
+
+  evento    Evento @relation(fields: [eventoId], references: [id], onDelete: Cascade)
+  usuario   Usuario? @relation(fields: [usuarioId], references: [id], onDelete: SetNull)
+
+  criadoEm  DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+}

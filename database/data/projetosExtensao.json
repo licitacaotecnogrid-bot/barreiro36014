@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "titulo": "Workshop: Desenvolvimento Mobile para Iniciantes",
+    "areaTemática": "Desenvolvimento Mobile",
+    "descricao": "Workshop prático de desenvolvimento de aplicações mobile para a comunidade local",
+    "momentoOcorre": "2025-03-15",
+    "tipoPessoasProcuram": "Estudantes de programação e desenvolvedores iniciantes",
+    "comunidadeEnvolvida": "Comunidade de tecnologia local da região de Belo Horizonte",
+    "imagem": null,
+    "professorCoordenadorId": 1
+  },
+  {
+    "id": 2,
+    "titulo": "Programa de Mentoria em Desenvolvimento Full Stack",
+    "areaTemática": "Desenvolvimento Full Stack",
+    "descricao": "Programa de mentoria oferecido para a comunidade externa em desenvolvimento full stack",
+    "momentoOcorre": "2025-04-01",
+    "tipoPessoasProcuram": "Profissionais em transição de carreira e autodidatas",
+    "comunidadeEnvolvida": "Agências de desenvolvimento local e startups",
+    "imagem": null,
+    "professorCoordenadorId": 3
+  }
+]

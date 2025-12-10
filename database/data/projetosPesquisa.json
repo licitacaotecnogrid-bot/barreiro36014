@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "titulo": "Análise de Padrões de Segurança em Aplicações Web",
+    "areaTemática": "Segurança da Informação",
+    "descricao": "Pesquisa sobre vulnerabilidades e padrões de segurança em aplicações web modernas",
+    "momentoOcorre": "2025-03-15",
+    "problemaPesquisa": "Quais são os padrões de vulnerabilidade mais comuns em aplicações web?",
+    "metodologia": "Análise de código-fonte, testes de penetração e revisão de literatura",
+    "resultadosEsperados": "Documentação de vulnerabilidades comuns e recomendações de segurança",
+    "imagem": null,
+    "professorCoordenadorId": 1
+  },
+  {
+    "id": 2,
+    "titulo": "Otimização de Algoritmos em Computação em Nuvem",
+    "areaTemática": "Computação em Nuvem",
+    "descricao": "Estudo sobre otimização de recursos em ambientes de nuvem",
+    "momentoOcorre": "2025-04-20",
+    "problemaPesquisa": "Como otimizar a distribuição de recursos em computação em nuvem?",
+    "metodologia": "Simulação computacional e análise de dados",
+    "resultadosEsperados": "Algoritmos otimizados e métricas de desempenho",
+    "imagem": null,
+    "professorCoordenadorId": 2
+  }
+]

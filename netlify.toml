@@ -1,0 +1,21 @@
+[build]
+  command = "pnpm install && npm run build"
+  functions = "netlify/functions"
+  publish = "dist/spa"
+
+[functions]
+  external_node_modules = ["express", "@prisma/client"]
+  node_bundler = "esbuild"
+  timeout = 30
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# API proxy - redireciona /api para a função serverless
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+  force = true

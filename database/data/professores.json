@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "nome": "Prof. Ana Silva",
+    "email": "ana.silva@pucminas.br",
+    "senha": "senha123",
+    "curso": "Análise e Desenvolvimento de Sistemas"
+  },
+  {
+    "id": 2,
+    "nome": "Prof. Carlos Oliveira",
+    "email": "carlos.oliveira@pucminas.br",
+    "senha": "senha123",
+    "curso": "Análise e Desenvolvimento de Sistemas"
+  },
+  {
+    "id": 3,
+    "nome": "Prof. Júlia Costa",
+    "email": "julia.costa@pucminas.br",
+    "senha": "senha123",
+    "curso": "Análise e Desenvolvimento de Sistemas"
+  },
+  {
+    "id": 4,
+    "nome": "Prof. Marcos Santos",
+    "email": "marcos.santos@pucminas.br",
+    "senha": "senha123",
+    "curso": "Análise e Desenvolvimento de Sistemas"
+  }
+]
